@@ -44,6 +44,7 @@
 }
 
 .crest {
-    height: 10em;
-    width: 10em;
+    height: 6em;
+    margin:auto;
+    display: block;
 }
