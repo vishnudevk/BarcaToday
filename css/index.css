@@ -52,3 +52,20 @@
 .whiteText{
     color: white;
 }
+
+.badge{
+    background: grey;
+}
+
+.card-header{
+    background-color: rgba(255,255,255,.6)
+}
+
+
+.card{
+    background-color: rgba(255,255,255,.6)
+}
+
+a{ 
+    color:#291A53;
+}
