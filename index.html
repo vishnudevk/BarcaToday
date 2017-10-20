@@ -88,14 +88,14 @@
                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                     <div class="card-block"  ng-repeat="fixture in fixtures">
                             <div class="card" style="width:100%">
-                                    <div class="card-header">
-                                        <h5> <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
-                                    </div>
-                                    <div class="card-block" style="margin-left:1.5em">
-                                        <h6 ng-if="fixture.status=='SCHEDULED'">{{fixture.date}}</h6>
-                                        <h6 ng-if="fixture.status=='FINISHED'">Final Result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
-                                    </div>
+                                <div class="card-header">
+                                    <h5> <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
                                 </div>
+                                <div class="card-block" style="margin-left:1.5em">
+                                    <h6 ng-if="fixture.status=='SCHEDULED'">{{fixture.date}}</h6>
+                                    <h6 ng-if="fixture.status=='FINISHED'">Final result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

@@ -1,43 +1,13 @@
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
 
-.content:before {
-    content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: -1;
-
-    display: block;
-    
-    width:120%;
-    height: 120%;
-    
-    left: -2em;
-    top: -2em;
-    
+.content {
+    /* position: fixed; */
     background: #291A53; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left, #291A53 , #6E031D); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(right, #291A53, #6E031D); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, #291A53, #6E031D); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #291A53 , #6E031D); /* Standard syntax */
     
-   /* background: url(../img/bg2.jpg) no-repeat center center fixed;*/
-    
-   /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;*/
-    
-    -webkit-filter: blur(30px);
-    -moz-filter: blur(30px);
-    -o-filter: blur(30px);
-    -ms-filter: blur(30px);
-    filter: blur(30px);
-     
-}
-
-.content {
-    position: fixed;
     left: 0;
     right: 0;
     z-index: 0;
