@@ -43,4 +43,17 @@ a{
 }
 a:hover{
     color: #6E031D;
+    text-decoration: none;
 }
+
+
+.flip-clock-label{
+    color: white !important;
+    font-size: 1.5em !important;
+}
+
+.match-clock{
+    width:620px;
+    position: absolute;
+    transform: scale(.5);
+    }

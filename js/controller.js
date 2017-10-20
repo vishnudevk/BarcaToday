@@ -35,11 +35,21 @@ app.controller('matchCtrl', function($scope, $http) {
         }
 
         var now = new Date();
+        
         if(new Date(obj1.date).getTime()-now.getTime() < now.getTime() - new Date(obj2.date).getTime()){
             $scope.nextMatch = obj1;
+            var futureDate  = new Date($scope.nextMatch.date);
+            var diff = futureDate.getTime() / 1000 - now.getTime() / 1000;
+    
+            clock = $('.match-clock').FlipClock(diff, {
+                clockFace: 'DailyCounter',
+                countdown: true
+            });
+
         }else{
             $scope.nextMatch = obj2;
         }
+
         $scope.getTeamDetails();
     }
 
