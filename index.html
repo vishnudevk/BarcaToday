@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta content='True' name='HandheldFriendly' />
-    <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
     <script src="js/index.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -13,18 +13,18 @@
     <link rel="stylesheet" href="css/index.css" />
 </head>
 
-<body class="content">
+<body class="content"  ng-app="barcaApp" ng-controller="matchCtrl">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-1 col-lg-2 col-xl-2"></div>
             <div class="col-4 col-sm-4 col-md-4  col-lg-3 col-xl-3">
                 <div class="col-12">
-                    <object type="image/svg+xml" data="https://upload.wikimedia.org/wikipedia/de/a/aa/Fc_barcelona.svg" class="crest" style="float:right">
+                    <object type="image/svg+xml" data="{{team1.crest}}" class="crest" style="float:right">
                     </object>
                 </div>
                 <div class="col-12 whiteText" style="display:block;float: right;">
                     <span style="display:block;float: right">
-                        FC Barcelona
+                            {{team1.name}}
                     </span>
                 </div>
             </div>
@@ -40,12 +40,12 @@
             </div>  
             <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <div class="col-12">
-                    <object type="image/svg+xml" data="http://upload.wikimedia.org/wikipedia/de/1/1f/Levante_ud.svg" class="crest" style="float:left">
+                    <object type="image/svg+xml" data="{{team2.crest}}" class="crest" style="float:left">
                     </object>
                 </div>
                 <div class="col-12 whiteText" style="display:block;float: left;">
                     <span style="display:block;float: left"> 
-                        RCDMallorca  
+                            {{team2.name}}
                     </span>
                 </div>
             </div>
@@ -86,8 +86,16 @@
                     </h5>
                 </div>
                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="card-block">
-                        A Vs B
+                    <div class="card-block"  ng-repeat="fixture in fixtures">
+                            <div class="card" style="width:100%">
+                                    <div class="card-header">
+                                        <h5> <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
+                                    </div>
+                                    <div class="card-block" style="margin-left:1.5em">
+                                        <h6 ng-if="fixture.status=='SCHEDULED'">{{fixture.date}}</h6>
+                                        <h6 ng-if="fixture.status=='FINISHED'">Final Result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
+                                    </div>
+                                </div>
                     </div>
                 </div>
             </div>
@@ -118,12 +126,8 @@
             </div>
         </div>
 
-
-
-
     </div>
-
-
+    <script src="js/controller.js"></script>
 </body>
 
 </html>
