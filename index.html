@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-12 whiteText text-center">
                     <span style="display:block;">
-                        2:1
+                            <h6 ng-if="nextMatch.status=='FINISHED'">{{nextMatch.result.goalsHomeTeam}}:{{nextMatch.result.goalsAwayTeam}}</h6>
                     </span>
                 </div>
             </div>  

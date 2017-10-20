@@ -6,9 +6,6 @@ app.controller('matchCtrl', function($scope, $http) {
 
     $scope.myTeamId = 81; //team id of barca, TODO it may change every season
     $scope.nextMatch;
-    $scope.team1 = {name:"FC Barcelona",crest:"https://upload.wikimedia.org/wikipedia/de/a/aa/Fc_barcelona.svg"};
-    $scope.team2 = {name:"Olympiacos F.C.",crest:"https://upload.wikimedia.org/wikipedia/de/9/96/Logo_Olympiakos_Piräus.svg"};
-
 
     $scope.fixtures = [];
 
@@ -43,9 +40,7 @@ app.controller('matchCtrl', function($scope, $http) {
         }else{
             $scope.nextMatch = obj2;
         }
-
         $scope.getTeamDetails();
-
     }
 
     $scope.getTeamDetails = function(){
@@ -54,13 +49,13 @@ app.controller('matchCtrl', function($scope, $http) {
         
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
             $scope.nextMatch.homeTeam = data.data.query.results.json
-       });
+        });
 
-       yql = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + $scope.nextMatch._links.awayTeam.href + '"')+"&format=json" ;//+ '&format=xml&callback=cbFunc';
+        yql = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + $scope.nextMatch._links.awayTeam.href + '"')+"&format=json" ;//+ '&format=xml&callback=cbFunc';
        
-       $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
+        $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
            $scope.nextMatch.awayTeam = data.data.query.results.json
-      });
+        });
 
 
     }
