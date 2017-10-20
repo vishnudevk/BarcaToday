@@ -19,12 +19,12 @@
             <div class="col-md-1 col-lg-2 col-xl-2"></div>
             <div class="col-4 col-sm-4 col-md-4  col-lg-3 col-xl-3">
                 <div class="col-12">
-                    <object type="image/svg+xml" data="{{team1.crest}}" class="crest" style="float:right">
+                    <object type="image/svg+xml" data="{{nextMatch.homeTeam.crestUrl}}" class="crest" style="float:right">
                     </object>
                 </div>
                 <div class="col-12 whiteText" style="display:block;float: right;">
                     <span style="display:block;float: right">
-                            {{team1.name}}
+                            {{nextMatch.homeTeamName}}
                     </span>
                 </div>
             </div>
@@ -40,12 +40,12 @@
             </div>  
             <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3">
                 <div class="col-12">
-                    <object type="image/svg+xml" data="{{team2.crest}}" class="crest" style="float:left">
+                    <object type="image/svg+xml" data="{{nextMatch.awayTeam.crestUrl}}" class="crest" style="float:left">
                     </object>
                 </div>
                 <div class="col-12 whiteText" style="display:block;float: left;">
                     <span style="display:block;float: left"> 
-                            {{team2.name}}
+                            {{nextMatch.awayTeamName}}
                     </span>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                                     <h5> <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
                                 </div>
                                 <div class="card-block" style="margin-left:1.5em">
-                                    <h6 ng-if="fixture.status=='SCHEDULED'">{{fixture.date}}</h6>
+                                    <h6>{{fixture.date | date:'MMM d, y h:mm a'}}</h6>
                                     <h6 ng-if="fixture.status=='FINISHED'">Final result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
                                 </div>
                             </div>
