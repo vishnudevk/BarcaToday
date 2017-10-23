@@ -1,0 +1,64 @@
+<html>  
+    <head><title>Barcelona RSS stream</title>  
+	<!-- Latest compiled and minified CSS -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+	<!-- Optional theme 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+	<!--<link rel="stylesheet" href="bootstrap.css">-->
+	<!-- Latest compiled and minified JavaScript --><!-- 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+    
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper-1.12.5.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+
+      <style type='text/css'>  
+        #results{ width: 40%; margin-left: 30%; border: 1px solid gray; padding: 5px; height: 200px; overflow: auto; }   
+		
+		h1, .h1, h2, .h2, h3, .h3 , strong {
+			color : #004D98 ;
+		}
+      </style>  
+      <script type='text/javascript'> 
+	  	function reload(){
+			//loadScript('http://query.yahooapis.com/v1/public/yql?q=select+*+from+rss+where+url%3D"http%3A%2F%2Fwww.fcbarcelona.com%2Ffootball%2Flist%2Farticles.rss"&format=json&callback=top_stories');
+            loadScript('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22https%3A%2F%2Ffeedity.com%2Ffcbarcelona-com%2FWlZbWlpR.rss%22&format=json&diagnostics=true&callback=top_stories');
+        }
+	    // Parses returned response and extracts  
+        // the title, links, and text of each news story.  
+        function top_stories(o){  
+          var items = o.query.results.item;  
+          var output = '';  
+          var no_items=items.length;  
+          for(var i=0;i<no_items;i++){  
+            var title = items[i].title;  
+            var link = items[i].link;  
+            var desc = items[i].description;  
+            output += "<h3><a href='" + link + "'>"+title+"</a></h3>" + desc + "<hr/>";  
+          }  
+          // Place news stories in div tag  
+          document.getElementById('results').innerHTML = output;    
+        }  
+		
+		function loadScript(script_url)
+			{
+				var head= document.getElementsByTagName('head')[0];
+				var script= document.createElement('script');
+				script.type= 'text/javascript';
+				script.src= script_url;
+				head.appendChild(script);
+			}
+        </script>  
+      </head>  
+      <body>  
+		<!-- used for reloading the news
+        <input type="button" onclick="reload();" value="reload stories"/>
+			-->
+		<!-- Div tag for stories results -->  
+        <div id='results'></div>  
+        <!-- The YQL statment will be assigned to src. -->  
+		<script src='https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22https%3A%2F%2Ffeedity.com%2Ffcbarcelona-com%2FWlZbWlpR.rss%22&format=json&diagnostics=true&callback=top_stories'>  
+		</script>   
+      </body>  
+    </html>  
