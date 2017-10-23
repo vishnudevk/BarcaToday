@@ -58,13 +58,15 @@ app.controller('matchCtrl', function($scope, $http) {
         var yql = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + $scope.nextMatch._links.homeTeam.href + '"')+"&format=json" ;//+ '&format=xml&callback=cbFunc';
         
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
-            $scope.nextMatch.homeTeam = data.data.query.results.json
+            $scope.nextMatch.homeTeam = data.data.query.results.json;
+            //$state.reload();
         });
 
         yql = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + $scope.nextMatch._links.awayTeam.href + '"')+"&format=json" ;//+ '&format=xml&callback=cbFunc';
        
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
-           $scope.nextMatch.awayTeam = data.data.query.results.json
+           $scope.nextMatch.awayTeam = data.data.query.results.json;
+           //$state.reload();
         });
 
 
