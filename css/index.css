@@ -56,4 +56,8 @@ a:hover{
     width:620px;
     position: absolute;
     transform: scale(.5);
-    }
+}
+
+object >html > body > img {
+    height: 6em;
+}

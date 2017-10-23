@@ -27,7 +27,7 @@ app.controller('matchCtrl', function($scope, $http) {
         for (i=0; i<len; ++i) {
             if (i in $scope.fixtures) {
                 var obj1 = $scope.fixtures[i];
-                if(obj1.status==='SCHEDULED'){
+                if(obj1.status==='SCHEDULED' || obj1.status==='TIMED'){
                     obj2 = $scope.fixtures[i-1];
                     break;
                 }
