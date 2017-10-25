@@ -84,12 +84,11 @@
                 </div>
         
                 <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    
                     <div class="card-block" style="margin-left:1.5em">
-                        <h6><a href="#">Link1</a></h6>
-                        <h6><a href="#">Link2</a></h6>
-                        <h6><a href="#">Link3</a></h6>
-                        <h6><a href="#">Link4</a></h6>
-                        <h6><a href="#">Link5</a></h6>
+                    
+                        <h6 ng-if="liveLinks.length==0">Links for live matches will be posted around 30 minutes before the match</h6>
+                        <h6   ng-repeat="liveLink in liveLinks"><a href="{{liveLink.url}}">Link {{$index+1}}</a></h6>
                     </div>
                 </div>
             </div>

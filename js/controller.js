@@ -8,6 +8,7 @@ app.controller('matchCtrl', function($scope, $http) {
     $scope.nextMatch;
 
     $scope.fixtures = [];
+    $scope.liveLinks = [];
 
 
      $scope.loadFixtures = function(){
@@ -59,20 +60,43 @@ app.controller('matchCtrl', function($scope, $http) {
         
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
             $scope.nextMatch.homeTeam = data.data.query.results.json;
-            //$state.reload();
         });
 
         yql = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + $scope.nextMatch._links.awayTeam.href + '"')+"&format=json" ;//+ '&format=xml&callback=cbFunc';
        
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
            $scope.nextMatch.awayTeam = data.data.query.results.json;
-           //$state.reload();
         });
 
 
     }
 
-   
+    $scope.getLiveLinks = function(){
+        var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent('select * from htmlstring where url="http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html"')+"&format=json&env=https://raw.githubusercontent.com/spier/yql-tables/banklz/alltables_forked.env";
+        //TODO change the env url when its up
+        //yql = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20htmlstring%20where%20url%3D'http%3A%2F%2Fwww.ronaldo7.net%2Fvideo%2Fbarcelona-live%2Fbarcelona-live-streaming.html'&format=json&env=http://datatables.org/alltables.env"
+        $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
+
+            var src = data.data.query.results.result;
+
+            while(true){
+                if(src.indexOf('<a class="style208" href="')>0){
+                    src = src.substring(src.indexOf('<a class="style208" href="')+26, src.length);
+                    var link = {};
+                    link.url = src.substring(0, src.indexOf(' rel')-1);
+                    if(link.url != "http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html")
+                    $scope.liveLinks.push(link);
+                }else{
+                    src = "";
+                    break;
+                }
+            }
+
+         });
+
+    }
+
     
     $scope.loadFixtures();
+    $scope.getLiveLinks(); 
 });
