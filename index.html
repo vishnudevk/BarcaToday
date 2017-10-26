@@ -9,6 +9,8 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/angular.1.6.6.min.js"></script>
     <script src="js/flipclock.min.js"></script>
+    <script src="js/modernizr.touch.js"></script>
+    <script src="js/mfb.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108370420-1"></script>
@@ -24,7 +26,9 @@
 
     <link rel="stylesheet" href="css/flipclock.css" />
     <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/mfb.css" />
     <link rel="stylesheet" href="css/index.css" />
+    
 </head>
 
 <body class="content"  ng-app="barcaApp" ng-controller="matchCtrl">
@@ -72,31 +76,81 @@
         </div>
         
 
-        <!-- Accordian -->
-        <div id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="card">
-                <div class="card-header" role="tab" id="headingOne">
-                    <h5 class="mb-0">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Watch Live
-                        </a>
-                    </h5>
-                </div>
-        
-                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                    
-                    <div class="card-block" style="margin-left:1.5em">
-                    
-                        <h6 ng-if="liveLinks.length==0">Links for live matches will be posted around 30 minutes before the match</h6>
-                        <h6   ng-repeat="liveLink in liveLinks"><a href="{{liveLink.url}}"  target="_blank" rel="nofollow">Link {{$index+1}}</a></h6>
-                    </div>
+        <!-- Live -->
+        <div class="card" ng-show="showLive">
+            <div class="card-header" role="tab" id="headingOne">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Watch Live
+                    </a>
+                </h5>
+            </div>
+    
+            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                
+                <div class="card-block" style="margin-left:1.5em">
+                
+                    <h6 ng-if="liveLinks.length==0">Links for live matches will be posted around 30 minutes before the match</h6>
+                    <h6   ng-repeat="liveLink in liveLinks"><a href="{{liveLink.url}}"  target="_blank" rel="nofollow">Link {{$index+1}}</a></h6>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header" role="tab" id="headingTwo">
+        </div>
+
+        <!--Fixtures -->
+        <div class="card"  ng-show="showFixtures">
+            <div class="card-header" role="tab" id="headingTwo">
+                <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Fixtures
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="card-block"  ng-repeat="fixture in fixtures">
+                        <div class="card" style="width:100%">
+                            <div class="card-header">
+                                <h5> <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
+                            </div>
+                            <div class="card-block" style="margin-left:1.5em">
+                                <h6>{{fixture.date | date:'MMM d, y h:mm a'}}</h6>
+                                <h6 ng-if="fixture.status=='FINISHED'">Final result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Standings-->
+        <div class="card" ng-show="showStandings">
+            <div class="card-header" role="tab" id="headingThree">
+                <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Standings
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="card-block"  ng-repeat="fixture in fixtures">
+                        <div class="card" style="width:100%">
+                            <div class="card-header">
+                                <h5> <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
+                            </div>
+                            <div class="card-block" style="margin-left:1.5em">
+                                <h6>{{fixture.date | date:'MMM d, y h:mm a'}}</h6>
+                                <h6 ng-if="fixture.status=='FINISHED'">Final result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+         <!-- News-->
+         <div class="card" ng-show="showNews">
+                <div class="card-header" role="tab" id="headingThree">
                     <h5 class="mb-0">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Fixtures
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            News
                         </a>
                     </h5>
                 </div>
@@ -114,34 +168,40 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header" role="tab" id="headingThree">
-                    <h5 class="mb-0">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Team Barca
-                        </a>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="card-block">
-                        <div class="card" style="width:100%">
-                            <div class="card-header">
-                                <h3>
-                                    <span class="badge badge-default">25</span> Thomas Vermaelen</h3>
-                            </div>
-                            <div class="card-block" style="margin-left:1.5em">
-                                <h6>Position: Centre-Back </h6>
-                                <h6>Nationality: Belgium</h6>
-                                <h6>Contract: 2019-06-30</h6>
-                                <h6>DOB: 1985-11-14</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+    <ul class="mfb-component--br mfb-slidein " id="menu" data-mfb-toggle="hover">
+            <li class="mfb-component__wrap">
+              <a data-mfb-label="Go" class="mfb-component__button--main" onclick="clickFlot();">
+                <i class="mfb-component__main-icon--resting glyphicon glyphicon-star"></i>
+                <i class="mfb-component__main-icon--active glyphicon glyphicon-star"></i>
+              </a>
+              <ul class="mfb-component__list">
+                <li>
+                  <a href="#" data-mfb-label="Fixture" class="mfb-component__button--child" ng-click="fixturesClick()">
+                    <i class="mfb-component__child-icon glyphicon glyphicon-calendar"></i>
+                  </a>
+                </li>
+                <li>
+                    <a href="#" data-mfb-label="Standings" class="mfb-component__button--child" ng-click="standingsClick()">
+                        <i class="mfb-component__child-icon glyphicon glyphicon-sort-by-attributes"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-mfb-label="News" class="mfb-component__button--child" ng-click="newsClick()">
+                        <i class="mfb-component__child-icon glyphicon glyphicon-bullhorn"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-mfb-label="Live Link" class="mfb-component__button--child" ng-click="liveClick();">
+                        <i class="mfb-component__child-icon glyphicon glyphicon-facetime-video"></i>
+                    </a>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+
     <script src="js/controller.js"></script>
 </body>
 

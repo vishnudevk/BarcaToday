@@ -7,12 +7,12 @@
     background: -o-linear-gradient(right, #291A53, #6E031D); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, #291A53, #6E031D); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #291A53 , #6E031D); /* Standard syntax */
+ 
     
+    margin-top: 2em;
     left: 0;
     right: 0;
     z-index: 0;
-    /*margin-left: 20px;
-    margin-right: 20px;*/
 }
 
 .crest {
@@ -60,4 +60,19 @@ a:hover{
 
 object >html > body > img {
     height: 6em;
+}
+
+
+.glyphicon::before{
+    /* line-height:2.7; */
+}
+
+
+.mfb-component__button--main, .mfb-component__button--child{
+    color: #f1f1f1 !important;
+    background-color:#291A53;
+}
+
+.mfb-component__icon, .mfb-component__main-icon--active, .mfb-component__main-icon--resting, .mfb-component__child-icon{
+    margin-top : 30%;
 }

@@ -10,6 +10,10 @@ app.controller('matchCtrl', function($scope, $http) {
     $scope.fixtures = [];
     $scope.liveLinks = [];
 
+    $scope.showLive = true; 
+    $scope.showNews = false;
+    $scope.showStandings = false;
+    $scope.showFixtures = false;
 
      $scope.loadFixtures = function(){
         var url = 'http://api.football-data.org/v1/teams/'+$scope.myTeamId+'/fixtures';
@@ -96,7 +100,43 @@ app.controller('matchCtrl', function($scope, $http) {
 
     }
 
+    $scope.liveClick = function(){
+        $scope.showLive = true; 
+        $scope.showNews = false;
+        $scope.showStandings = false;
+        $scope.showFixtures = false;
+    }
+
+    $scope.newsClick = function(){
+        $scope.showLive = false; 
+        $scope.showNews = true;
+        $scope.showStandings = false;
+        $scope.showFixtures = false;
+    }
+
+
+    $scope.standingsClick = function(){
+        $scope.showLive = false; 
+        $scope.showNews = false;
+        $scope.showStandings = true;
+        $scope.showFixtures = false;
+    }
+
+    $scope.fixturesClick = function(){
+        $scope.showLive = false; 
+        $scope.showNews = false;
+        $scope.showStandings = false;
+        $scope.showFixtures = true;
+    }
+
     
     $scope.loadFixtures();
     $scope.getLiveLinks(); 
 });
+
+
+
+
+/* function clickFlot(){
+    document.getElementById("menu").setAttribute('data-mfb-state', 'closed');
+} */
