@@ -62,9 +62,15 @@ object >html > body > img {
     height: 6em;
 }
 
+.card-header{
+    height : 3.3em;
+    border-radius: 10px;
+    background-color: #eee;
+}
 
-.glyphicon::before{
-    /* line-height:2.7; */
+.card-block{
+    margin-left : 1em;
+    padding-top: 0.75em;
 }
 
 
