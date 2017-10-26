@@ -2,10 +2,11 @@ var app = angular.module('barcaApp', []).config(function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist(['**']);
   });
 
-app.controller('matchCtrl', function($scope, $http) {
+app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
 
     $scope.myTeamId = 81; //team id of barca, TODO it may change every season
     $scope.nextMatch;
+    $scope.matchNumber = 0;
 
     $scope.fixtures = [];
     $scope.liveLinks = [];
@@ -34,6 +35,7 @@ app.controller('matchCtrl', function($scope, $http) {
                 var obj1 = $scope.fixtures[i];
                 if(obj1.status==='SCHEDULED' || obj1.status==='TIMED'){
                     obj2 = $scope.fixtures[i-1];
+                    $scope.matchNumber = i;
                     break;
                 }
             }
@@ -127,6 +129,10 @@ app.controller('matchCtrl', function($scope, $http) {
         $scope.showNews = false;
         $scope.showStandings = false;
         $scope.showFixtures = true;
+        setTimeout(function(){
+            $location.hash('match'+($scope.matchNumber-1));
+            $anchorScroll();
+        },100);
     }
 
     

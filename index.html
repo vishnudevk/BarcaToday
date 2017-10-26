@@ -124,7 +124,7 @@
                 <h4 class="card-title">Fixtures</h4>
             </div>
             <div class="card-block">
-                <span ng-repeat="fixture in fixtures">
+                <span ng-repeat="fixture in fixtures" id="match{{$index}}" >
                 <h5 class="card-subtitle mb-2" > <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
                 <h6>{{fixture.date | date:'MMM d, y h:mm a'}}</h6>
                 <h6 ng-if="fixture.status=='FINISHED'">Final result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
