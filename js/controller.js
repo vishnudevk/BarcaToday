@@ -141,8 +141,14 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
 });
 
 
+var floatstatus = false ;//false means floating button is closed
 
-
-/* function clickFlot(){
-    document.getElementById("menu").setAttribute('data-mfb-state', 'closed');
-} */
+ function clickFloat(){
+    if(floatstatus){
+        document.getElementById("menu").setAttribute('data-mfb-state','closed');
+        floatstatus = false;
+    }else{
+        document.getElementById("menu").setAttribute('data-mfb-state','open');
+        floatstatus = true;
+    }
+}

@@ -136,30 +136,30 @@
 
 
     <!--floating button -->
-    <ul class="mfb-component--br mfb-slidein " id="menu" data-mfb-toggle="hover">
+    <ul class="mfb-component--br mfb-slidein " id="menu" data-mfb-toggle="click" data-mfb-state="closed">
             <li class="mfb-component__wrap">
-              <a data-mfb-label="Go" class="mfb-component__button--main">
+              <a data-mfb-label="Go" class="mfb-component__button--main" onclick="clickFloat();">
                 <i class="mfb-component__main-icon--resting glyphicon glyphicon-star"></i>
                 <i class="mfb-component__main-icon--active glyphicon glyphicon-star"></i>
               </a>
               <ul class="mfb-component__list">
                 <li>
-                  <a href="#" data-mfb-label="Fixture" class="mfb-component__button--child" ng-click="fixturesClick()">
+                  <a href="#" data-mfb-label="Fixture" class="mfb-component__button--child" ng-click="fixturesClick()" onclick="clickFloat();">
                     <i class="mfb-component__child-icon glyphicon glyphicon-calendar"></i>
                   </a>
                 </li>
                 <li>
-                    <a href="#" data-mfb-label="Standings" class="mfb-component__button--child" ng-click="standingsClick()">
+                    <a href="#" data-mfb-label="Standings" class="mfb-component__button--child" ng-click="standingsClick()" onclick="clickFloat();">
                         <i class="mfb-component__child-icon glyphicon glyphicon-sort-by-attributes"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-mfb-label="News" class="mfb-component__button--child" ng-click="newsClick()">
+                    <a href="#" data-mfb-label="News" class="mfb-component__button--child" ng-click="newsClick()" onclick="clickFloat();">
                         <i class="mfb-component__child-icon glyphicon glyphicon-bullhorn"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-mfb-label="Live Link" class="mfb-component__button--child" ng-click="liveClick();">
+                    <a href="#" data-mfb-label="Live Link" class="mfb-component__button--child" ng-click="liveClick();" onclick="clickFloat();">
                         <i class="mfb-component__child-icon glyphicon glyphicon-facetime-video"></i>
                     </a>
                 </li>
