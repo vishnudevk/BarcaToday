@@ -11,6 +11,8 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
     $scope.fixtures = [];
     $scope.liveLinks = [];
     $scope.news = [];
+    $scope.standings = [];
+
 
     $scope.showLive = true; 
     $scope.showNews = false;
@@ -112,6 +114,14 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
         });
     }
 
+    $scope.getStandings = function(){
+        var qry = 'select * from json where url="http://api.football-data.org/v1/competitions/455/leagueTable"';
+        var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent(qry)+"&format=json";
+        $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
+            $scope.standings = data.data.query.results.json.standing;
+        });
+    }
+
     $scope.liveClick = function(){
         $scope.showLive = true; 
         $scope.showNews = false;
@@ -150,6 +160,7 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
     $scope.getLiveLinks();
     
     $scope.getNews();
+    $scope.getStandings();
 
 });
 

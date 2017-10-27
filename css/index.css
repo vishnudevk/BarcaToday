@@ -21,6 +21,23 @@
     display: block;
 }
 
+.crestSmall {
+    height: 100%;
+    width:100%;
+    margin:auto;
+    display: block;
+}
+
+.position{
+    height: 1.5em;
+    width: 1.5em;
+    font-size: xx-large;
+    margin-left: .5em;
+    font-weight:600;
+    color: #291A53;
+}
+
+
 .whiteText{
     color: white;
 }

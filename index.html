@@ -108,14 +108,26 @@
          <!-- Standings -->
          <div class="card"  ng-show="showStandings">
                 <div class="card-header" role="tab" id="headingOne">
-                    <h4 class="card-title">Standings</h4>
+                    <h4 class="card-title">Standings - La Liga</h4>
                 </div>
-                <div class="card-block">
-                    <h6 class="card-subtitle mb-2" ng-if="liveLinks.length==0">Links for live matches will be posted around 30 minutes before the match</h6>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                    <h6   ng-repeat="liveLink in liveLinks">
-                        <a href="{{liveLink.url}}"  target="_blank" rel="nofollow">Link {{$index+1}}</a>
-                    </h6>
+                <div style="margin-left:-2.2em; width: 100%">
+                    <ul class="media-list">
+                        <li class="media"  ng-repeat="standing in standings">
+                            <div class="media-left position" style="width: 1.5em;">
+                                {{standing.position}}
+                            </div>
+                            <div class="media-left position">
+                                <a href="#">
+                                    <object type="image/png" ng-attr-data="{{standing.crestURI}}" class="crestSmall">
+                                    </object>
+                                </a>
+                            </div>
+                            <div class="media-body" style="margin-left:1em;">
+                                <h4 class="media-heading">{{standing.teamName}}</h4>
+                                Points {{standing.points}}
+                            </div>
+                        </li>
+                    </ul>
                 </div>
         </div>
 
