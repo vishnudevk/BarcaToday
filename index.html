@@ -11,6 +11,7 @@
     <script src="js/flipclock.min.js"></script>
     <script src="js/modernizr.touch.js"></script>
     <script src="js/mfb.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108370420-1"></script>
@@ -96,11 +97,11 @@
                     <h4 class="card-title">News</h4>
                 </div>
                 <div class="card-block">
-                    <h6 class="card-subtitle mb-2" ng-if="liveLinks.length==0">Links for live matches will be posted around 30 minutes before the match</h6>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                    <h6   ng-repeat="liveLink in liveLinks">
-                        <a href="{{liveLink.url}}"  target="_blank" rel="nofollow">Link {{$index+1}}</a>
-                    </h6>
+                    <span ng-repeat="newsItem in news" id="news{{$index}}" >
+                            <h6 class="card-subtitle mb-2">{{newsItem.title}}</h6>
+                            <span ng-bind-html="newsItem.description"></span>           
+                            <hr>
+                    </span>
                 </div>
         </div>
 
@@ -125,10 +126,10 @@
             </div>
             <div class="card-block">
                 <span ng-repeat="fixture in fixtures" id="match{{$index}}" >
-                <h5 class="card-subtitle mb-2" > <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
-                <h6>{{fixture.date | date:'MMM d, y h:mm a'}}</h6>
-                <h6 ng-if="fixture.status=='FINISHED'">Final result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
-                <hr>
+                    <h5 class="card-subtitle mb-2" > <span class="glyphicon glyphicon-calendar" style="font-size: .75em;"></span> {{fixture.homeTeamName}} VS {{fixture.awayTeamName}} </h3>
+                    <h6>{{fixture.date | date:'MMM d, y h:mm a'}}</h6>
+                    <h6 ng-if="fixture.status=='FINISHED'">Final result {{fixture.result.goalsHomeTeam}}:{{fixture.result.goalsAwayTeam}}</h6>
+                    <hr>
                 </span>
             </div>
         </div>

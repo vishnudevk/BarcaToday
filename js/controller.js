@@ -1,4 +1,4 @@
-var app = angular.module('barcaApp', []).config(function($sceDelegateProvider) {
+var app = angular.module('barcaApp', ['ngSanitize']).config(function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist(['**']);
   });
 
@@ -10,6 +10,7 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
 
     $scope.fixtures = [];
     $scope.liveLinks = [];
+    $scope.news = [];
 
     $scope.showLive = true; 
     $scope.showNews = false;
@@ -102,6 +103,13 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
 
     }
 
+    $scope.getNews = function(){
+        var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent('select * from rss where url="https://feedity.com/fcbarcelona-com/WlZbWlpR.rss"')+"&format=json";
+        $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
+            $scope.news = data.data.query.results.item;
+        });
+    }
+
     $scope.liveClick = function(){
         $scope.showLive = true; 
         $scope.showNews = false;
@@ -137,7 +145,10 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
 
     
     $scope.loadFixtures();
-    $scope.getLiveLinks(); 
+    $scope.getLiveLinks();
+    
+    $scope.getNews();
+
 });
 
 
