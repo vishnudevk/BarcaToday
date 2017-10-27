@@ -47,12 +47,13 @@
 }
 
 .card-header{
-    background-color: rgba(255,255,255,.6)
+    background-color: rgba(255,255,255,.6);
+    color: #291A53;
 }
 
 
 .card{
-    background-color: rgba(255,255,255,.6)
+    background-color: rgba(255,255,255,.6);
 }
 
 a{ 
