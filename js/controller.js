@@ -79,7 +79,8 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
     }
 
     $scope.getLiveLinks = function(){
-        var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent('select * from htmlstring where url="http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html"')+"&format=json&env=https://raw.githubusercontent.com/spier/yql-tables/banklz/alltables_forked.env";
+        var qry = 'select * from htmlstring where url="http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html"';
+        var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent(qry)+"&format=json&env=https://raw.githubusercontent.com/spier/yql-tables/banklz/alltables_forked.env";
         //TODO change the env url when its up
         //yql = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20htmlstring%20where%20url%3D'http%3A%2F%2Fwww.ronaldo7.net%2Fvideo%2Fbarcelona-live%2Fbarcelona-live-streaming.html'&format=json&env=http://datatables.org/alltables.env"
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
@@ -104,7 +105,8 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
     }
 
     $scope.getNews = function(){
-        var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent('select * from rss where url="https://feedity.com/fcbarcelona-com/WlZbWlpR.rss"')+"&format=json";
+        var qry = 'select * from rss where url="https://feedity.com/fcbarcelona-com/WlZbWlpR.rss"';
+        var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent(qry)+"&format=json";
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
             $scope.news = data.data.query.results.item;
         });
