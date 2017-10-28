@@ -107,7 +107,8 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
     }
 
     $scope.getNews = function(){
-        var qry = 'select * from rss where url="https://feedity.com/fcbarcelona-com/WlZbWlpR.rss"';
+        var qry = 'select * from rss where url="https://feedity.com/fcbarcelona-com/WlBbU1BW.rss"';//all news
+        //var qry = 'select * from rss where url="https://feedity.com/fcbarcelona-com/WlZbWlpR.rss"';
         var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent(qry)+"&format=json";
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
             $scope.news = data.data.query.results.item;
