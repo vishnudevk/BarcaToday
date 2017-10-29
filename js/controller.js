@@ -20,7 +20,7 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
     $scope.showFixtures = false;
 
      $scope.loadFixtures = function(){
-        var url = 'http://api.football-data.org/v1/teams/'+$scope.myTeamId+'/fixtures';
+        var url = 'http://api.football-data.org/v1/teams/'+$scope.myTeamId+'/fixtures?'+(new Date).getTime();
         var yql = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + url + '"')+"&format=json" ;//+ '&format=xml&callback=cbFunc';
         
         $http.jsonp(yql, {jsonpCallbackParam: 'callback'}).then(function(data){
@@ -81,7 +81,7 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
     }
 
     $scope.getLiveLinks = function(){
-        var qry = 'select * from htmlstring where url="http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html"';
+        var qry = 'select * from htmlstring where url="http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html?'+(new Date).getTime()+'"';
         var yql = 'https://query.yahooapis.com/v1/public/yql?q='+ encodeURIComponent(qry)+"&format=json&env=https://raw.githubusercontent.com/spier/yql-tables/banklz/alltables_forked.env";
         //TODO change the env url when its up
         //yql = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20htmlstring%20where%20url%3D'http%3A%2F%2Fwww.ronaldo7.net%2Fvideo%2Fbarcelona-live%2Fbarcelona-live-streaming.html'&format=json&env=http://datatables.org/alltables.env"
@@ -90,11 +90,25 @@ app.controller('matchCtrl', function($scope, $http, $anchorScroll, $location) {
             var src = data.data.query.results.result;
 
             while(true){
+                /* if(src.indexOf('class="style208"')>0){
+                    var link = src.substring(0,src.indexOf('class="style208"'));
+                    src = src.substring(src.indexOf('class="style208"')+16,src.length);
+                    link = link.substring(link.lastIndexOf('<a href="')+9,link.length);
+                    link = link.substring(0,link.indexOf('"'));
+                    var linkObj = {};
+                    linkObj.url = link;
+                    if(link.url != "http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html")
+                        $scope.liveLinks.push(linkObj);
+                }else{
+                    src = "";
+                    break;
+                } */
                 if(src.indexOf('<a class="style208" href="')>0){
                     src = src.substring(src.indexOf('<a class="style208" href="')+26, src.length);
                     var link = {};
-                    link.url = src.substring(0, src.indexOf(' rel')-1);
-                    if(link.url != "http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html")
+                    var url = "https://adf.ly/18236241/";
+                    link.url = url+src.substring(0, src.indexOf(' rel')-1);
+                    if(link.url != url+"http://www.ronaldo7.net/video/barcelona-live/barcelona-live-streaming.html")
                     $scope.liveLinks.push(link);
                 }else{
                     src = "";
